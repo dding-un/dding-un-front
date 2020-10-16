@@ -1,5 +1,5 @@
 // src/components/main/Contents.jsx
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
@@ -29,7 +29,7 @@ const datas = [{
   name: "최원준", saying: "나는 왕이다.", create: "10분전",
   thumbnail: "https://d3b39vpyptsv01.cloudfront.net/photo/1/2/905d3b6941f2aa85e24fd302cd75a8c6.jpg", like: 20
 }, {
-  name: "김용현", saying: "저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다저는 대리가 아닙니다", create: "5초전",
+  name: "김용현", saying: "저는 김대리가 아닙니다", create: "5초전",
   thumbnail: "https://4.bp.blogspot.com/-JdQOwyxlKBg/Ut9kEID6tcI/AAAAAAAABes/G8XWnlB9kc8/s1600/beautiful_space_view-wallpaper-2560x1440.jpg", like: 5
 }]
 
@@ -37,6 +37,7 @@ const Contents = () => {
   const classes = useStyles()
   const [show, setShow] = useState(false)
   const [contents, setContents] = useState('')
+  const [thumb, setThumb] = useState({ imgFile: null, imgPreview: null })
   const [error, setError] = useState(false)
 
   const onShow = () => setShow(true)
@@ -44,21 +45,28 @@ const Contents = () => {
     setShow(false)
     setContents('')
     setError(false)
+    setThumb(null)
   }
   const onChange = e => setContents(e.target.value)
   const onClick = () => {
     if(contents.length > 30)
       setError(true)
     else {
-      datas.push({ name: "유도곤", saying: contents, create: "1초전", like: 0, thumbnail: "https://d3b39vpyptsv01.cloudfront.net/photo/1/2/905d3b6941f2aa85e24fd302cd75a8c6.jpg" })
+      datas.push({ name: "유도곤", saying: contents, create: "1초전", like: 0, thumbnail: thumb.imgPreview })
       onHide()
       alert('명언 작성 완료')
     }
   }
+  const onThumbChange = (e) => {
+    let reader = new FileReader()
+    let img = e.target.files[0]
+    reader.onloadend = () => setThumb({ imgFile: img, imgPreview: reader.result })
+    reader.readAsDataURL(img)
+  }
 
   useEffect(() => {
-    console.log(datas)
-  }, [datas])
+    console.log(thumb)
+  }, [thumb])
 
   return (
     <ContentsWrap>
@@ -92,6 +100,12 @@ const Contents = () => {
         <Modal.Body>
           <StyledTextarea onChange={onChange} aria-label="minimum height" rowsMin={3} placeholder="명언을 작성해주세요." />
           <Error error={error}>30자 이하로 입력해주세요 !</Error>
+          { thumb && <ThumbImg src={thumb.imgPreview} alt="" /> }
+          <ThumbUp>
+            <input type="file" name="thumbnail" onChange={onThumbChange} accept="image/*" style={{display:'none'}} />
+            <input type="submit" style={{display:'none'}} />
+            썸네일 업로드
+          </ThumbUp>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>닫기</Button>
@@ -171,6 +185,25 @@ const StyledTextarea = styled(TextareaAutosize)`
   width: 100%;
   resize: none;
   font-size: 1.25rem;
+`
+
+const ThumbImg = styled.img`
+  margin: 1rem auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
+const ThumbUp = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+  background: ${oc.teal[4]};
+  cursor: pointer;
 `
 
 export default Contents
