@@ -86,6 +86,7 @@ const HeaderInner = styled.div`
     margin-right: 100px;
     cursor: pointer;
     letter-spacing: -2px;
+    line-height: 95%;
     a {
       text-decoration: none;
       color: ${oc.teal[4]};
