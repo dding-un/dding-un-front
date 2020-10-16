@@ -82,7 +82,7 @@ const HeaderInner = styled.div`
   .logo {
     font-size: 1.5rem;
     font-weight: 600;
-    width: 80px;
+    width: 85px;
     margin-right: 100px;
     cursor: pointer;
     letter-spacing: -2px;
