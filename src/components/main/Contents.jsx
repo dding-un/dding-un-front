@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import oc from 'open-color'
-import { like } from 'static/img'
+import { like } from 'assets/img'
 
 const useStyles = makeStyles((theme) => ({
   fab: {

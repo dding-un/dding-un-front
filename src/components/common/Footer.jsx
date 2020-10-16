@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import oc from 'open-color'
-import { github, facebook, instagram } from 'static/svg'
+import { github, facebook, instagram } from 'assets/svg'
 
 const Footer = () => {
   return (
