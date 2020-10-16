@@ -17,6 +17,10 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     cursor: pointer;
     color: inherit;
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+    }
   }
   img {
     display: block;

@@ -44,7 +44,7 @@ const Header = () => {
             </div>
           </div>
           <div>
-            <Button bBack={bBack} bColor={bColor}><Link to="/login">로그인</Link></Button>
+            <Link to="/login"><Button bBack={bBack} bColor={bColor}>로그인</Button></Link>
           </div>
         </HeaderInner>
       </HeaderWrap>
@@ -87,10 +87,7 @@ const HeaderInner = styled.div`
     cursor: pointer;
     letter-spacing: -2px;
     line-height: 95%;
-    a {
-      text-decoration: none;
-      color: ${oc.teal[4]};
-    }
+    color: ${oc.teal[4]};
   }
   .menu {
     display: flex;

@@ -11,9 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.render(
   <>
-    <GlobalStyle />
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <GlobalStyle />
         <App />
       </BrowserRouter>
     </ThemeProvider>
