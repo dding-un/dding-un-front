@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import oc from 'open-color'
+import axios from 'axios'
+import qs from 'qs'
 
 const Header = () => {
   const [state, setState] = useState({
@@ -25,7 +27,13 @@ const Header = () => {
       })
     })
   }, [])
-  let { sbackground, scolor, bBack, bColor, shadow, drop } = state
+  const onClick = () => {
+    window.Kakao.init("ebe3d82f71c1cf8f540b8e2129716067")
+    window.Kakao.Auth.authorize({
+      'redirectUri': 'http://codstice.kr:3000'
+    })
+  }
+  let { sbackground, scolor, shadow, drop } = state
   return (
     <>
       <HeaderWrap drop={drop} sbackground={sbackground} scolor={scolor} shadow={shadow} >
@@ -44,7 +52,7 @@ const Header = () => {
             </div>
           </div>
           <div>
-            <Link to="/login"><Button bBack={bBack} bColor={bColor}>로그인</Button></Link>
+              <Button onClick={onClick}>로그인</Button>
           </div>
         </HeaderInner>
       </HeaderWrap>

@@ -1,5 +1,5 @@
 // src/components/main/Contents.jsx
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
@@ -63,10 +63,6 @@ const Contents = () => {
     reader.onloadend = () => setThumb({ imgFile: img, imgPreview: reader.result })
     reader.readAsDataURL(img)
   }
-
-  useEffect(() => {
-    console.log(thumb)
-  }, [thumb])
 
   return (
     <ContentsWrap>
